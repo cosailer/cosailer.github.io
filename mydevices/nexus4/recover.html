@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    body { background: #e7e7e7; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    #page { background: #ffffff; margin: 50px; border: 2px solid #c0c0c0; padding: 10px; }
+    #header { background: #4b6983; border: 2px solid #7590ae; text-align: center; padding: 10px; color: #ffffff; }
+    #header h1 { color: #ffffff; }
+    #body { padding: 10px; }
+    
+    span.tt { font-family: monospace; }
+    span.bold { font-weight: bold; }
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+    <h1>Arcadia</h1> Keep It Stupidly Simple
+  </div>
+  
+  <div id="body">
+  <h2>Recover a dead Nexus 4</h2>
+    
+  <p align="right"><b>Return to Device Index <a href="../index.html">HERE</a></b></p>
+    
+  <br/>My sister accidentally dropped her Nexus 4 in the sea when she tried to take some pictures on her holiday. She continued using the phone for a few days before it couldn't start any more. Then she sent the phone to me.<br/>
+
+  <br/>The power button doesn't work anymore, therefore the phone couldn't start. But the phone can still charge, which is a good sign. After a few search I followed some steps from XDA [<a href="http://forum.xda-developers.com/nexus-4/general/tutorial-how-to-unbrick-n4-t2347060">LINK Here</a>] to recovered the phone as well as the personal data.<br/>
+
+  <br/>This is exactly what I did:<br/>
+
+  <br/>1, open the phone and clean it, now the button works.
+  <br/>2, follow the guide, use LGNPST to rescue the phone, stop at flashing the stock rom.
+  <br/>3, boot into bootloader and unlock it with fastboot.
+  <br/>4, flash twrp recovery.
+  <br/>5, flash usb-otg kernel [here] under twrp using adb sideload.
+  <br/>6, use usb-otg under twrp with Y-cable to recover user data.
+  <br/>7, follow the guide [here] to flashing the factory image.<br/>
+
+  <br/>side note:
+  <br/>apparently the you can pull the complete folder directly from the recovery mode, so no otg required. I feel kinda stupid now...
+  
+  <br/>
+  <br/>
+  <br/>
+  <hr>
+  <i>hosted by Google Drive 2014/Oct/25</i>
+  
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    body { background: #e7e7e7; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    #page { background: #ffffff; margin: 50px; border: 2px solid #c0c0c0; padding: 10px; }
+    #header { background: #4b6983; border: 2px solid #7590ae; text-align: center; padding: 10px; color: #ffffff; }
+    #header h1 { color: #ffffff; }
+    #body { padding: 10px; }
+    
+    span.tt { font-family: monospace; }
+    span.bold { font-weight: bold; }
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+    <h1>Arcadia</h1> Keep It Stupidly Simple
+  </div>
+  
+  <div id="body">
+  
+  <h1>Add minipcie ssd on wlan slots</h1>
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+  
+  <br/>The first time when I opened up my EEE PC 900, I noticed that the Wlan slot and the SSD slot looks exactly the same. Then there came the question,  wether we can exchang these two cards. I am sure many people asked the same question as well. Well it turned out that you can't. Because the Wlan card uses the standard minipcie interface while the minissd slot on the ASUS netbook uses a customized interface, but they both uses the same physical minipcie slot.<br/>
+  
+  <br/>Then a few years later, netbooks became more and more popular, they developed a new interface called mSATA that again shares the minipcie slot, but are not compatible with the minipcie interface. You can read all bout them on Wiki. Short story is, not all card that looks like a minipcie device will work in a standard minipcie slot.<br/>
+  
+  <br/>Until a few days ago I noticed someone actually find a standard minipcie ssd SR16C6MME [<a href="http://www.mydellmini.com/forum/dell-mini-9-hardware-upgrades/203-solid-state-drive-wlan-mini-pci-e-slot-differences-2.html">LINK Here</a>]. Acording to him, the card will work with standard minipcie interface, which means that it basically works in any Wlan slots. If the BIOS supports boot from PCI, then it is even possible to boot from the card.<br/>
+  
+  <br/>This is perfect for my EEE PC 701, since it uses onboard 4G SSD and the default ssd slot is not soldered, therefore I can only extend fast hard drive through the Wlan slot. It will lose the wifi ability, but since it is used as a server, no big deal.<br/>
+  
+  <br/>I ordered the lastest model FPN032C2RM, its a 32GB MLC ssd [<a href="6_10058.pdf">PDF Here</a>] that has a onboard SATA JMF608 [<a href="jmf608.pdf">PDF Here</a>] and a minipcie-to-SATA controller ASM 1061[<a href="http://www.asmedia.com.tw/eng/e_show_products.php?item=118">LINK Here</a>]. I put it in my EEE PC 701 and it worked! I installled Xubuntu on it and it boots off the minipcie ssd. <br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20140911_192138.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">EPC 701 inside</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20140911_202701.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">PCI boot screen</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>The only small disappointment that I have is that the card is full size minipcie, it does not fit in most of the half sized wlan slots nowadays.<br/>
+  
+  <br/>
+  <br/>
+  <hr/>
+  <i>hosted by Google Drive, 2014/Sep/11</i>
+  </div>
+</div>
+</body>
+</html>

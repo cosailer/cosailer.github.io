@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    body { background: #e7e7e7; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    #page { background: #ffffff; margin: 50px; border: 2px solid #c0c0c0; padding: 10px; }
+    #header { background: #4b6983; border: 2px solid #7590ae; text-align: center; padding: 10px; color: #ffffff; }
+    #header h1 { color: #ffffff; }
+    #body { padding: 10px; }
+    
+    span.tt { font-family: monospace; }
+    span.bold { font-weight: bold; }
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+    <h1>Arcadia</h1> Keep It Stupidly Simple
+  </div>
+  
+  <div id="body">
+  
+  <h1>Build network with DD-WRT (P1)</h1>
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+  
+  <br/>I always wanted to build my own network in my room, so that I can access the resources whenever I want, wherever I want. Since I am not a professional network admin, I can only gain the experience that it required from the Internet, so it has to be a long term project.<br/>
+  
+  <br/>If you want to start a server in your room, you must want it to be power efficient. No one likes to open a desktop computer 24/7 without shut-down. Of course you can set up the BIOS timer to wake your desktop computer when you get up, and shut down when you go to bed, but still, It’s not a good choice. The same applies to laptop and nettop or even thin client, like cracking a nut with a car.<br/>
+  
+  <br/>From my point of view, the best choice would be a router running customized firmware, the qualified routers can be found everywhere with a fair price and the software are free to use. The best thing about router is they consume very little energy and won’t make a sound, perfect choice for a personal home use 24/7 server.<br/>
+
+  <br/>I have two routers, [Belkin F5D7230-4 v1444] and [Asus WL-500G Premium v2] the first one is an ancient naked board that has been modified to 64MB RAM and 4MB Flash, it has USB 1.1 built in. wl500 has 32MB RAM and 8MB Flash, and has USB 2.0 built in. considering the detailed specifications, I decided to use 7230 as a web server and wl500 as a file sever.<br/>
+  
+  <br/>Flashing the routers was an pretty interesting experience. There is little to say about wl500, you can use the official firmware updater to flash the latest versions of DD-WRT, I chose the [17990M NEWD-2 Eko Mega] version, with almost every feature in and the newer network driver.<br/>
+  
+  <br/>As for the 7230, it almost killed my brain to get it working. In fact, due to some misunderstandings, I though I bricked it, that’s why I bought wl500. Since its hardware is not the original version, you need a new CFE to access the larger RAM and Flash. Mine has already a new CFE, so I don’t need to worry about it. And because of the new CFE, the MAC address always changes to a static one(not the one labeled at the back of the board of course) after I flash whatever firmware. This will cause problem if two routers used the same CFE without modification. When placed close, the network will simply not work at all. I tried to change the default MAC in CFE to match the original one through telnet, but it is read only. then I had to change the MAC in the NVRAM, and do it again whenever the router resets, which is really annoying.<br/>
+  
+  <br/>Another important thing about 7230 is, if you flashed the wrong firmware and do a reset, its default address will change to 192.168.2.1 instead of 192.168.1.1. After lots of trial and error I finally flashed [17990M VINT Eko std-nokaid-usb] version on it. I tried the standard version but it just won’t work, I don’t know why, and I really need USB driver.<br/>
+  
+  <br/>
+  <br/>
+  <hr/>
+  <i>hosted by Google Drive, 2012/Jan/03</i>
+  </div>
+</div>
+</body>
+</html>
