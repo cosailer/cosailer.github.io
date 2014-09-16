@@ -20,6 +20,12 @@
     a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
     a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
     a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    
+    ol {  background:#4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
     a:hover { text-decoration: none; color: blue; background: #FC0; }
     
     img { padding: 5px; border: 1px  solid black;}
@@ -37,10 +43,55 @@
   
   <div id="body">
   
-  <h1>Small Clock program on DF3120</h1>
+  <h2>Small Clock program on DF3120</h2>
+  
   <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
   
-  <br/><br/>
+  <br/>DF3120 is a small digital photo frame that capable of running small linux programs. I read about it on a hacker site [<a href="https://sites.google.com/site/repurposelinux/df3120">LINK Here</a>]. <br/>
+  
+  <br/>I like it very much because it is very small, pretty and has a screen on it, perfect on a real desktop. Then I bought 3 of this little fella :-). <br/>
+  
+  <br/>The device itself does not have a battery inside. Therefore whenever you restart it, you’ll have to set the time again, and there is no really convenient ways to do it yet. So I made use of its USB ethernet and attach it to a OpenWRT router, added it to the local LAN. Then I compiled the ntpdate package, so that it can automatically connect to the time server to sync time.<br/>
+  
+  <br/>Then I wrote a small pacman/mario clock program for it, followed on this guide [<a href="http://www.sistemasorp.es/2012/01/22/probando-el-marco-digital-parrot-df3120-parte-2/">GUIDE Here</a>], so that I can put it on my desk :-).<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/P1000371.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">dfclock on DF3120</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20140318_135136.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">dfclock on DF3120</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>You can browse the source code here [<a href="https://github.com/cosailer/dfclcok">SOURCE Here</a>], A running video can be found here [<a href="https://www.youtube.com/watch?v=pSO7csfhFC4">LINK Here</a>]<br/>
+  
+  <br/><li><code>https://github.com/cosailer/dfclcok</code></li>
+  
+  <br/>This progame runs on the framebuffer device, it does't have to be df3120 though. Later I'll build one that makes use of the sdl library inside.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/P1000377.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">dfclock on OK6410</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>If you don’t want to rebuild the image and kernel for DF3120, you can also use mine provided below. However, I don’t provide any warranty. I added some more commands to the busybox, like chmod, fdisk, mkfs, httpd, unzip etc.. also nano, lighttpd, lynx and ntpdate are compiled to run on DF3120.<br/>
+  
+  <br/>The image is copied from a 256MB SD card, it contains a single primary partition. The kernel is built with Linux Gadget ethernet support.<br/>
+  
+  <ol>
+    <li><code>df3120.7z, 141MB [<a href="https://48dbf0f9438319646b3981750308184139c9b58a.googledrive.com/host/0B-PlSu8oC8g-SlJDMklSdnloZlk/mydevices/df3120/df3120.7z">LINK Here</a>] -> main disk image</code></li>
+    <li><code>linux, 1.37MB[<a href="https://48dbf0f9438319646b3981750308184139c9b58a.googledrive.com/host/0B-PlSu8oC8g-SlJDMklSdnloZlk/mydevices/df3120/linux">LINK Here</a>] -> kernel with Gadget ethernet</code></li>
+    <li><code>rcS, 1.5KB[<a href="rcs">LINK Here</a>] -> my boot script</code></li>
+  </ol>
+  
   
   <br/>
   <br/>

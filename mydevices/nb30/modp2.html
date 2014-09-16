@@ -89,7 +89,7 @@
 
   <br/>Also, with samsung_laptop module disabled, the brightness hotkey does not function at all. After some searching, I found 4 ways to adjust screen brightness.<br/>
 
-  <br/><b>A</b>, the easiest way to do it is to add 'acpi_backlight=vendor' parameter at the grub configuration file.<br/>
+  <br/><b>A, the easiest way to do it is to add 'acpi_backlight=vendor' parameter at the grub configuration file</b><br/>
 
     <li><code>sudo nano /etc/default/grub</code></li>
 
@@ -104,7 +104,7 @@
 
   <br/>after that, the FN + Vol hotkey should work. It can even turn the backlight completely off, very useful.<br/>
 
-  <br/><b>B</b>, use setpci to interface with hardware directly<br/>
+  <br/><b>B, use setpci to interface with hardware directly</b><br/>
 
     <li><code>sudo setpci -s 00:02.0 F4.B=value</code></li>
   <br/>the value is a hex number form 00-FF<br/>
@@ -120,13 +120,13 @@
 
   <br/>This also sets the maximum brightness for the system.<br/>
 
-  <br/><b>C</b>, interface with system device<br/>
-  <br/>under root, enter<br/>
+  <br/><b>C, interface with system device</b><br/>
+  under root, enter<br/>
     <li><code>echo value > /sys/class/backlight/intel_backlight/brightness</code></li>
   <br/>the value is a integer number form 0-12421<br/>
 
-  <br/><b>D</b>, third party programs<br/>
-  <br/>xbacklight is highly recommended since it does not require root privilege<br/>
+  <br/><b>D, third party programs</b><br/>
+  xbacklight is highly recommended since it does not require root privilege<br/>
 
   <br/>to set the brightness to half full<br/>
     <li><code>xbacklight -set 50</code></li>
@@ -171,15 +171,15 @@
 
   <br/>the off.sh script changes the theme to 'High contrast', changes the desktop background image to complete white(you can either use a white image or change the background solid color to white). Then it modifies the file association. Because we need to change the theme of the terminal and the text editor too, but I didn't find a way to do it under command line. So I took the easy way out and used a different text editor mousepad with a predefined theme, then change mimeapps.list file while necessary. For the terminal, I just used xterm and  created a desktop launcher with the option<br/>
 
-    <li><code>xterm -rv -fa “monospace:size=12”</code></li>
+    <li><code>xterm -rv -fa "monospace:size=12"</code></li>
 
-  <br/>the on.sh script does the opposite, but be sure to change the background image in the script to the one that you are using.<br/>
+  <br/>the on.sh script does the opposite, but be sure to change the theme and background image in the script to the one that you want to use.<br/>
   
   <br/>That's the end of the software part. I have to say that I learned a lot through this. Maybe there are better computers, better hardware, but you cannot compare the fun in modding something yourself.<br/>
   <br/>
   <br/>
   <hr/>
-  <i>hosted by GitHub, 2013/Oct/22</i>
+  <i>hosted by GitHub, 2014/Sep/16</i>
   </div>
 </div>
 </body>

@@ -1,0 +1,64 @@
+#!/bin/hush
+
+echo ">> Mounting filesystems"
+mount -t proc /proc /proc
+echo 2 >/proc/cpu/alignment
+mount -t sysfs none /sys
+mkdir -p /dev/pts dev/shm
+mount -t devpts devpts /dev/pts
+mount -t tmpfs none /dev/shm
+mount / / -o remount,noatime,commit=20 >/dev/null 2>&1
+mount / / -o remount,rw
+
+echo ">> Starting system loggers"
+syslogd -C16
+klogd
+
+# LOAD MODULES -- do not delete this line
+echo ">> Creating devices"
+/sbin/mdev -s
+
+echo ">> Setting console"
+export TERM=linux
+export TERMINFO=/usr/share/terminfo
+
+echo ">> Start Network 192.168.5.177/24"
+ifconfig lo 127.0.0.1 up
+ifconfig usb0 192.168.5.177 netmask 255.255.255.0 up
+route add default gw 192.168.5.1 usb0
+
+echo ">> Starting telnetd"
+telnetd -l /bin/sh
+
+echo ">> Starting Bluetooth"
+hciattach -s 115200 /dev/ttySAC0 bcm2035 921600 flow 00:00:00:00:00 >/dev/null 2>&1
+hciconfig hci0 up
+sleep 2
+
+#echo ">> Starting PAN connection"
+#pand -M --listen --role GN
+#sleep 2
+
+echo ">> Starting lighttpd Webserver"                                                  
+/opt/lighttpd/sbin/lighttpd -f /opt/lighttpd/config/lighttpd.conf                                                         
+sleep 2                                           
+
+echo ">> Disable console blanking"
+printf "\e[9;0]" > /dev/tty0
+echo 0 > /sys/class/graphics/fbcon/cursor_blink
+
+echo ">> Waiting for NetWork"
+sleep 1
+
+echo ">> Sync time with NTP.ORG"
+ntpdate 0.pool.ntp.org
+
+#echo ">> Connecting to BdKeyboard"
+#hcitool scan
+#hidd --connect 20:08:40:20:04:11
+#sleep 1
+
+echo ">> Starting Clock"
+sleep 1
+/app/clock 1 2
+
