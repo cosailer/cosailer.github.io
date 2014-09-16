@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    body { background: #e7e7e7; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    #page { background: #ffffff; margin: 50px; border: 2px solid #c0c0c0; padding: 10px; }
+    #header { background: #4b6983; border: 2px solid #7590ae; text-align: center; padding: 10px; color: #ffffff; }
+    #header h1 { color: #ffffff; }
+    #body { padding: 10px; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    ol {  background:#4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+    <h1>Arcadia</h1>
+    <code>
+        <span class="yellow">K</span>eep <span class="yellow">I</span>t <span class="yellow">S</span>tupidly <span class="yellow">S</span>imple
+    </code>
+  </div>
+  
+  <div id="body">
+  
+  <h1>SAMSUNG NB30 MOD (Part 2: Software)</h1>
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+
+  <br/>Compare to the hardware mod of NB30, the software part is even more annoying. Not only the drivers, but also some weird problems.<br/>
+
+  <br/>For a huge Linux fan, I still need windows sometimes. So I decided to install Windows and Xubuntu dual boot. At first I used Windows 7, but the performance is really poor, the system is very slow. Then I tried Windows 8, it is not perfect, but still much better. As for the Xubuntu I choose  Xubuntu 14.04 LTS 64 bit, simply because the CPU supports 64 bit :-).<br/>
+
+  <br/>The easiest way is to install dual boot with grub, of course, is to install Windows 8 first and then Xubuntu.<br/>
+
+  <ol><h3>1, Install Windows 8:</h3></ol>
+  Not much to say. I used the windows 8 32 bit image, wrote the iso to a USB flahs drive and installed it on the half of the space on my SSD. Then I licenced it with Microsoft Dreamspark. <br/>
+
+  <br/><b>RAM and Keyboard:</b> the most easy upgrade, no additional driver required.<br/>
+
+  <br/><b>SSD:</b> although we don't need to install extra driver, the official tool Sandisk SSD Toolkit [<a href="http://kb.sandisk.com/app/answers/detail/a_id/9328/~/ssd-toolkit-support-information">LINK Here</a>] is definitely recommend to install. With this tool, we can monitor the disk status and update the firmware.<br/>
+
+  <br/><b>WiFi and Bluetooth:</b> the drivers can be updated through the windows update center<br/>
+
+  <br/><b>CrystalHD Decoder:</b> Install the official Windows Driver from Broadcom [<a href="http://www.broadcom.com/support/crystal_hd/">LINK Here</a>]. But please note that some media players must add the extra filters in order for the decoder to work. For potplayer (my favourite), go to   [setting]->[filter]->[video decoder]->[filter management]<br/>
+
+  <br/>add the external filter from the install folder<br/>
+  <li><code>/your-install-folder/Broadcom/Broadcom CrystalHD Decoder/bcmDFilter.dll</code></li>
+
+  <br/>Then you'll be able to use the 'Broadcom Video Decoder' in the [video decoder]. You can use the decoder to decode many formats: MPEG1, XVID, H264, AVC1, WMV3, VC-1. You can watch your HD video with the decoder smoothly.<br/>
+
+  <br/><b>Screen:</b> The touch screen worked out of the box with 2 touch points supported, which really surprised me because it is only a resistive touch screen. But the backlight cannot be adjusted directly, you need to modify some small registry settings [<a href="http://www.sammynetbook.com/forum/threads/16031-Brightness-control-in-Windows-8">GUIDE Here</a>].<br/>
+
+  <br/>run regedit as admin and edit dword key "FeatureTestControl" in<br/>
+    <li><code>[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000]</code></li>
+
+  <br/>Set value as "FFFE" (without quotes).<br/>
+
+  <br/>Then you can control the backlight with the hotkey.<br/>
+
+  <ol><h3>2, Install Xubuntu 14.04 LTS:</h3></ol>
+  There were some problems when I tried to install Xubuntu. I spent several days to solve the problems.<br/>
+
+  <br/>The first obsticle I encountered is the installation problem. I wrote the iso file to my usb flash drive with 'LinuxLive USB Creator', but it just won't boot, no matter what. In the end I used an external DVD driver to finish the job.<br/>
+
+  <br/>Usually for the SAMSUNG NB30, there is a kernel module called 'samsung_laptop' to make use of all the hotkeys and control LCD backlight. But there is a small bug in it, with it running, the 'rfkill' keeps physically disabling my WiFi card. You must block it at the boot to enable the WiFi card. To block it, write the following line at the end of the file /etc/modprobe.d/blacklist.conf<br/>
+
+  <li><code>blacklist samsung_laptop</code></li>
+
+  <br/>Almost all the hardware can work out of the box with Xubuntu 14.04, except for the Broadcom Decoder. The touch screen also works under Xubuntu, but only 1 touch point supported. To install the broadcom crystal hd decoder, don't use the official linux driver, its outdated and does not work with latest kernel. Please follow this guide [<a href="https://github.com/yeradis/crystalhd">GUIDE Here</a>].<br/>
+
+  <br/>Also, with samsung_laptop module disabled, the brightness hotkey does not function at all. After some searching, I found 4 ways to adjust screen brightness.<br/>
+
+  <br/><b>A</b>, the easiest way to do it is to add 'acpi_backlight=vendor' parameter at the grub configuration file.<br/>
+
+    <li><code>sudo nano /etc/default/grub</code></li>
+
+  <br/>change the line<br/>
+    <li><code>GRUB_CMDLINE_LINUX_DEFAULT = "quit splash"</code></li>
+
+  <br/>into<br/>
+    <li><code>GRUB_CMDLINE_LINUX_DEFAULT = "quit splash acpi_backlight=vendor"</code></li>
+
+  <br/>ctrl + x to save the file and run<br/>
+    <li><code>sudo update-grub</code></li>
+
+  <br/>after that, the FN + Vol hotkey should work. It can even turn the backlight completely off, very useful.<br/>
+
+  <br/><b>B</b>, use setpci to interface with hardware directly<br/>
+
+    <li><code>sudo setpci -s 00:02.0 F4.B=value</code></li>
+  <br/>the value is a hex number form 00-FF<br/>
+
+  <br/>so to set the brightness to full, use<br/>
+    <li><code>sudo setpci -s 00:02.0 F4.B=FF</code></li>
+
+  <br/>to turn off the backlight, use<br/>
+    <li><code>sudo setpci -s 00:02.0 F4.B=00</code></li>
+
+  <br/>you can also check current value with<br/>
+    <li><code>lspci -s 00:02.0 -xxx | grep f0: | awk '{print $6}'</code></li>
+
+  <br/>This also sets the maximum brightness for the system.<br/>
+
+  <br/><b>C</b>, interface with system device<br/>
+  <br/>under root, enter<br/>
+    <li><code>echo value > /sys/class/backlight/intel_backlight/brightness</code></li>
+  <br/>the value is a integer number form 0-12421<br/>
+
+  <br/><b>D</b>, third party programs<br/>
+  <br/>xbacklight is highly recommended since it does not require root privilege<br/>
+
+  <br/>to set the brightness to half full<br/>
+    <li><code>xbacklight -set 50</code></li>
+
+  <br/>However the FN+F5 hotkey still does not work. But we can adjust the brightness till 0, so no that important.<br/>
+
+
+  <br/>To better make use of the pixel qi screen, I need a way to switch off the backlight quickly. But just turn off the backlight isn't enough, I still need to switch to a different theme to have better contrast, better view of the screen, since only gray scale image is presented with backlight off.<br/>
+
+  <br/>I wrote two small scripts to do the job, it uses xfconf-query and xbacklight, therefore no administrative rights required. Just save it with .sh file extension and execute.<br/>
+
+  <br/>off.sh<br/>
+  
+  <ol>
+    <li><code># change desktop theme, icon, and backgroung img</code></li>
+    <li><code>xfconf-query -c xsettings -p /Net/ThemeName -s HighContrast</code></li>
+    <li><code>xfconf-query -c xsettings -p /Net/IconThemeName -s HighContrast</code></li>
+    <li><code>xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorLVDS1/workspace0/last-image -s /home/white.png.bak</code></li>
+    <li></li>
+    <li><code># change file association, since gedit theme cannot be edit through cmd easily</code></li>
+    <li><code>mv ~/.local/share/applications/select/mimeapps.list.mousepad  ~/.local/share/applications/mimeapps.list</code></li>
+    <li></li>
+    <li><code># turn off backlight</code></li>
+    <li><code>xbacklight -set 0</code></li>
+    <li><code>on.sh</code></li>
+  </ol>
+
+  <br/>on.sh<br/>
+  
+  <ol>
+    <li><code># change desktop theme, icon, and backgroung img</code></li>
+    <li><code>xfconf-query -c xsettings -p /Net/ThemeName -s Greybird</code></li>
+    <li><code>xfconf-query -c xsettings -p /Net/IconThemeName -s elementary-xfce-dark</code></li>
+    <li><code>xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorLVDS1/workspace0/last-image -s /home/[your original background image.jpg]</code></li>
+    <li><code></code></li>
+    <li><code># change file association, since gedit theme cannot be edit through cmd easily</code></li>
+    <li><code>mv ~/.local/share/applications/select/mimeapps.list.gedit  ~/.local/share/applications/mimeapps.list</code></li>
+    <li><code></code></li>
+    <li><code># turn on backlight</code></li>
+    <li><code>xbacklight -set 100</code></li>
+  </ol>
+
+  <br/>the off.sh script changes the theme to 'High contrast', changes the desktop background image to complete white(you can either use a white image or change the background solid color to white). Then it modifies the file association. Because we need to change the theme of the terminal and the text editor too, but I didn't find a way to do it under command line. So I took the easy way out and used a different text editor mousepad with a predefined theme, then change mimeapps.list file while necessary. For the terminal, I just used xterm and  created a desktop launcher with the option<br/>
+
+    <li><code>xterm -rv -fa “monospace:size=12”</code></li>
+
+  <br/>the on.sh script does the opposite, but be sure to change the background image in the script to the one that you are using.<br/>
+  
+  <br/>That's the end of the software part. I have to say that I learned a lot through this. Maybe there are better computers, better hardware, but you cannot compare the fun in modding something yourself.<br/>
+  <br/>
+  <br/>
+  <hr/>
+  <i>hosted by GitHub, 2013/Oct/22</i>
+  </div>
+</div>
+</body>
+</html>
