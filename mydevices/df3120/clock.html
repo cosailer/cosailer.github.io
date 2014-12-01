@@ -6,26 +6,36 @@
     <title>Arcadia</title>
     
     <style type="text/css" media="screen">
-    body { background: #e7e7e7; font-family: Verdana, sans-serif; font-size: 11pt; }
     
-    #page { background: #ffffff; margin: 50px; border: 2px solid #c0c0c0; padding: 10px; }
-    #header { background: #4b6983; border: 2px solid #7590ae; text-align: center; padding: 10px; color: #ffffff; }
-    #header h1 { color: #ffffff; }
-    #body { padding: 10px; }
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;	 
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;	 	 
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
     
     span.yellow { font-weight: bold; color: yellow;}
     span.red { font-weight: bold; color: red;}
     span.blue { font-weight: bold; color: blue;}
     
-    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
-    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
-    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
-    
-    ol {  background:#4b6983; color: white;}
+    ol {  background: #4b6983; color: white;}
     ol li {  background:#ffc; }
     ol code {  color: black;  }
     li {  background:#ffc; }
     
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
     a:hover { text-decoration: none; color: blue; background: #FC0; }
     
     img { padding: 5px; border: 1px  solid black;}
@@ -33,15 +43,10 @@
 </head>
 
 <body>
-<div id="page">
-  <div id="header">
-    <h1>Arcadia</h1>
-    <code>
-        <span class="yellow">K</span>eep <span class="yellow">I</span>t <span class="yellow">S</span>tupidly <span class="yellow">S</span>imple
-    </code>
-  </div>
-  
-  <div id="body">
+  <header>
+  <h1>Arcadia</h1>
+      <span class="yellow">K</span>eep <span class="yellow">I</span>t <span class="yellow">S</span>tupidly <span class="yellow">S</span>imple
+  </header>
   
   <h2>Small Clock program on DF3120</h2>
   
@@ -69,9 +74,9 @@
   </tbody>
   </table>
   
-  <br/>You can browse the source code here [<a href="https://github.com/cosailer/dfclcok">SOURCE Here</a>], A running video can be found here [<a href="https://www.youtube.com/watch?v=pSO7csfhFC4">LINK Here</a>]<br/>
+  <br/>You can browse the source code here [<a href="https://github.com/cosailer/fbclcok">SOURCE Here</a>], A running video can be found here [<a href="https://www.youtube.com/watch?v=pSO7csfhFC4">LINK Here</a>]<br/>
   
-  <br/><li><code>https://github.com/cosailer/dfclcok</code></li>
+  <br/><li><code>https://github.com/cosailer/fbclcok</code></li>
   
   <br/>This progame runs on the framebuffer device, it does't have to be df3120 though. Later I'll build one that makes use of the sdl library inside.<br/>
   
@@ -87,17 +92,17 @@
   <br/>The image is copied from a 256MB SD card, it contains a single primary partition. The kernel is built with Linux Gadget ethernet support.<br/>
   
   <ol>
-    <li><code>df3120.7z, 141MB [<a href="https://48dbf0f9438319646b3981750308184139c9b58a.googledrive.com/host/0B-PlSu8oC8g-SlJDMklSdnloZlk/mydevices/df3120/df3120.7z">LINK Here</a>] -> main disk image</code></li>
-    <li><code>linux, 1.37MB[<a href="https://48dbf0f9438319646b3981750308184139c9b58a.googledrive.com/host/0B-PlSu8oC8g-SlJDMklSdnloZlk/mydevices/df3120/linux">LINK Here</a>] -> kernel with Gadget ethernet</code></li>
+    <li><code>df3120.7z, 141MB [<a href="https://googledrive.com/host/0B-PlSu8oC8g-akJBNWd3ZnlORHM/mydevices/df3120/df3120.7z">LINK Here</a>] -> main disk image</code></li>
+    <li><code>linux, 1.37MB[<a href="https://googledrive.com/host/0B-PlSu8oC8g-akJBNWd3ZnlORHM/mydevices/df3120/linux">LINK Here</a>] -> kernel with Gadget ethernet</code></li>
     <li><code>rcS, 1.5KB[<a href="rcs">LINK Here</a>] -> my boot script</code></li>
   </ol>
   
   
   <br/>
   <br/>
-  <hr/>
-  <i>hosted by GitHub, 2012/Jan/03</i>
-  </div>
-</div>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
 </body>
 </html>
