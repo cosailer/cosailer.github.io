@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;   
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;      
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    ol {  background: #4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    code { white-space: pre; }
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    
+    </style>
+</head>
+
+<body>
+  <header>
+  <h1>Arcadia</h1>
+      the quieter you become, the more you hear
+  </header>
+  
+  <h2>SAMSUNG NB30 onboard accelerometer upgrade</h2>
+  
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+  
+  <br/><b>The Story:</b><br/>
+  
+  <br/>For many years I kept my old NB30 as a small fallback computer, because I believe there are much potential to this little under powered netbook. With more I learn, the more I discovered.<br/>
+  
+  <br/>The first time I had my hands on this netbook, I noticed there was a free fall sensor driver for windows 7. That's when I knew there is a small accelerometer in this netbook. It detects sudden acceleration of the computer in case of free fall, and temporarily lock hard drive to protect disk and data. Then I had the idea to read from the sensor and see what I can do with the data. I remember I did try to examine the free fall driver, but came out nothing, since I didn't know what I was looking for.<br/>
+  
+  <br/>One day I installed debian on my other computer Elitebook 8540w, I noticed in the dmesg log, there is a input device for accelerometer. I googled it and found that many computers use accelerometer to protect their hard drive. In the second attempt, I installed Ubuntu in my NB30, but still nothing in dmesg log related to any accelerometer showed up. Again I search online forums for a while and found a free fall driver for ubuntu. Unfortunately it was for another model(cann't remember which one) and did not work for NB30. And that's where I was going to leave it.<br/>
+  
+  <br/>Several years later I just googled the netbook for information and found the schematics of the netbook somewhere free to download ! That's when things started to become interesting. It says the the sensor chip is LIS331DL [<a href="https://www.st.com/content/ccc/resource/technical/document/application_note/3f/f1/e3/3a/34/2e/4a/00/CD00229883.pdf/files/CD00229883.pdf/jcr:content/translations/en.CD00229883.pdf" >DATASHEET Here</a>] and connected to the mothermoard through I2C interface. The following picture shows the location of the sensor on the motherboard. The back cover needs to be freed in order to see it.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/s-l500.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">LIS331DL location</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>Then I learnt that I can use the i2c-tools to detect and check the sensor. However, when I fired up the tool, although I can see 5 i2c buses, all I could find from them was the display EDID eeprom. The accelerometer was not found anywhere, even the RAM SPD eeprom was not there.</br>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdetect -l</code></li>
+  <li><code>i2c-3  i2c         i915 gmbus dpc                    I2C adapter</code></li>
+  <li><code>i2c-1  i2c         i915 gmbus vga                    I2C adapter</code></li>
+  <li><code>i2c-4  i2c         i915 gmbus dpb                    I2C adapter</code></li>
+  <li><code>i2c-2  i2c         i915 gmbus panel                  I2C adapter</code></li>
+  <li><code>i2c-0  i2c         i915 gmbus ssc                    I2C adapter</code></li>
+  </ol>
+  
+  <br/>only bus i2c-2 has a target at 0x50(common address for eeproms), and i2cdump shows it was a EDID eeprom chip for the internal LCD panel(writable).<br/>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdetect -y 2</code>
+  <li><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</code></li>
+  <li><code>00:          -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>70: -- -- -- -- -- -- -- --</code>
+  </ol>
+  
+  <br/>Several months later when I was using lm-sensors, I noticed it tried to load a module named i2c-i801. I did the same thing and there it is! An extra i2c bus i2c-6 showed up!<br/>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# modprobe i2c-dev</code></li>
+  <li><code>root@SNB30-UBUNTU:~# modprobe i2c-i801</code></li>
+  <li><code>root@SNB30-UBUNTU:~# i2cdetect -l</code></li>
+  <li><code>i2c-3  i2c         i915 gmbus dpc                    I2C adapter</code></li>
+  <li><code>i2c-1  i2c         i915 gmbus vga                    I2C adapter</code></li>
+  <li><code>i2c-6  smbus       SMBus I801 adapter at 18a0        SMBus adapter</code></li>
+  <li><code>i2c-4  i2c         i915 gmbus dpb                    I2C adapter</code></li>
+  <li><code>i2c-2  i2c         i915 gmbus panel                  I2C adapter</code></li>
+  <li><code>i2c-0  i2c         i915 gmbus ssc                    I2C adapter</code></li>
+  <li><code>i2c-5  i2c         i915 gmbus dpd                    I2C adapter</code></li>
+  </ol>
+  
+  <br/>I searched the bus and had some interesting results!<br/>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdetect -y 6</code></li>
+  <li><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</code></li>
+  <li><code>00:          -- -- -- -- -- 08 -- -- -- -- -- -- --</code></li>
+  <li><code>10: -- -- -- -- -- -- -- -- -- -- -- -- -- 1d -- --</code></li>
+  <li><code>20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>40: -- -- -- -- 44 -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>60: -- -- -- -- -- -- -- -- -- 69 -- -- -- -- -- --</code></li>
+  <li><code>70: -- -- -- -- -- -- -- --</code></li>
+  </ol>
+  
+  <br/>According to the schematic found online, adress 0x69 is a CK-505M (Clock generator), dump as follows:<br/>
+   
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdump -y 6 0x69</code></li>
+  <li><code>No size specified (using byte-data access)</code></li>
+  <li><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef</code></li>
+  <li><code>00: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>10: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>20: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>30: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>40: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>50: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>60: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>70: 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d    ????????????????</code></li>
+  <li><code>80: 65 83 ff 77 ff 00 00 06 10 25 01 b6 0d 00 0d 00    e?.w...??%???.?.</code></li>
+  <li><code>90: 00 00 06 00 6a 00 00 00 14 00 00 00 00 ff ff ff    ..?.j...?.......</code></li>
+  <li><code>a0: 65 83 ff 77 ff 00 00 06 10 25 01 b6 0d 00 0d 00    e?.w...??%???.?.</code></li>
+  <li><code>b0: 00 00 06 00 6a 00 00 00 14 00 00 00 00 ff ff ff    ..?.j...?.......</code></li>
+  <li><code>c0: 65 83 ff 77 ff 00 00 06 10 25 01 b6 0d 00 0d 00    e?.w...??%???.?.</code></li>
+  <li><code>d0: 00 00 06 00 6a 00 00 00 14 00 00 00 00 ff ff ff    ..?.j...?.......</code></li>
+  <li><code>e0: 65 83 ff 77 ff 00 00 06 10 25 01 b6 0d 00 0d 00    e?.w...??%???.?.</code></li>
+  <li><code>f0: 00 00 06 00 6a 00 00 00 14 00 00 00 00 ff ff ff    ..?.j...?.......</code></li>
+  </ol>
+  
+  <br/>Address 0x50 is the SPD eeprom for the single DDR2 RAM. 0x3D should be the CPU thermal sensor, but it is missing for some reason, and I don't know whats sitting at address 0x08 and 0x44. That could be the story for another day. Originally there was something at 0x30, but when I tried to dump the content, nothing was there and it just disappeared ! Very strange. This happened on two different NB30 netbook. I hope I didn't break something.<br/>
+  
+  <br/>After checking the device datasheet, I can see the sensor at 0x1D. Then I wrote a small program to read the device register. The data decoded from the register contains the 3-axis accleration value, and that's what I was hoping to get all along!<br/>
+  
+  <br/>Later I spend some time searching the ST website, I found that there are some other sensor models share the same package and pinout with the LIS331DL, I picked the LIS3DH [<a href="https://www.st.com/resource/en/datasheet/cd00274221.pdf" >DATASHEET Here</a>] for better scale, resolution and the fact that it also has a temperature sensor built-in. Then I planned a chip upgrade from LIS331DL to LIS3DH. After I got the chips, I took out the whole motherboard and desoldered the original LIS331DL.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20190228_162416.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">LIS331DL (marking "33DL")</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20190228_163718.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">desoldered PCB</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>then I soldered the new LIS3DH carefully, not my best work but it works.</br>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20190228_170608.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;"> LIS3DH(marking "C3H")</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>I started the computer and there is the new sensor at address 0x19:</br>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdetect -y 6</code></li>
+  <li><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</code></li>
+  <li><code>00:          -- -- -- -- -- 08 -- -- -- -- -- -- --</code></li>
+  <li><code>10: -- -- -- -- -- -- -- -- -- 19 -- -- -- -- -- --</code></li>
+  <li><code>20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>40: -- -- -- -- 44 -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</code></li>
+  <li><code>60: -- -- -- -- -- -- -- -- -- 69 -- -- -- -- -- --</code></li>
+  <li><code>70: -- -- -- -- -- -- -- --</code></li>
+  </ol>
+  
+  <br>register dump at 0x19, at 0x0f we can see the value 0x33 corresponds with the WHO_AM_I device identification register for LIS3DH (0x3b for LIS331DL). </br>
+  
+  <ol>
+  <li><code>root@SNB30-UBUNTU:~# i2cdump -y 6 0x19</code></li>
+  <li><code>No size specified (using byte-data access)</code></li>
+  <li><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef</code></li>
+  <li><code>00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 33    ...............3</code></li>
+  <li><code>10: 88 9e 87 20 a0 32 1d 21 1b 90 90 85 c0 00 10 00    ??? ?2?!?????.?.</code></li>
+  <li><code>20: 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 20    ?.............. </code></li>
+  <li><code>30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</code></li>
+  </ol>
+  
+  <br>To read the sensor, it must first be powered up, the register CTRL_REG1 is responsible. And we need to set register CTRL_REG4 for resolution. Then we can read 3-axis accelerometer value at register OUT_X, OUT_Y and OUT_Z. I find the application information in the datasheet for LIS331DL explained better:</br>
+  
+  <ol>
+  <li><code>read STATUS_REG</code></li>
+  <li><code>if STATUS_REG(3)=0 then goto 1</code></li>
+  <li><code>if STATUS_REG(3)=1 then some data have been overwritten</code></li>
+  <li><code>read OUT_X</code></li>
+  <li><code>read OUT_Y</code></li>
+  <li><code>read OUT_Z</code></li>
+  <li><code>data processing</code></li>
+  <li><code>goto 1</code></li>
+  </ol>
+  
+  <br/>With the chip datasheet, I modified my program so that it can read 3-axis value from the new sensor as well as the temperature value (only relative temperature change, to measure absolute temperature value, calibration may be required).<br/>
+  
+  <br>I set the sensor at 400Hz, 2g scale and high resolution(HR) mode. In HR mode, each axis has 12-bit data output and takes 2 bytes(L byte and H byte) expressed in 2's complement and left-aligned. Below is a code snippet to convert the raw output data to actual value.</br>
+  
+  <ol>
+  <li><code>uint8_t acc_x_l = 0;</code></li>
+  <li><code>uint8_t acc_x_h = 0;</code></li>
+  <li><code>int16_t acc_x = 0;</code></li>
+  <li><code>acc_x = (acc_x_h << 8)|acc_x_l;</code></li>
+  <li><code>acc_x >>= 4;</code></li>
+  </ol>
+  
+  <br/>The temperature sensor inside LIS3DH has a similar way to read. First the TEMP_CFG_REG must be set to connect temperature sensor to ADC3, then we read register OUT_ADC3 for data. However, even the ADC supports up to 10-bit data ouput, the sensor is still only 8-bit, which means only the data in OUT_ADC3_H is useful. Also the sensor has a precision about one celsius per digit change.<br/>
+  
+  <br/>You can find the source of the program here [<a href="https://github.com/cosailer/i2c/tree/master/nb30_accelerometer">SOURCE Here</a>](for both LIS331DL and LIS2DH). Below is the sample program output on my NB30:<br/>
+  
+  <ol>
+  <li><code>>> LIS3DH found ! ID = 0x33</code></li>
+  <li><code>>> dispaly all registers</code></li>
+  <li><code>         0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F</code></li>
+  <li><code>   00 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 33 </code></li>
+  <li><code>   10 | 88 9E 87 20 A0 32 1D 21 1B 90 90 85 C0 00 10 00 </code></li>
+  <li><code>   20 | 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 20 </code></li>
+  <li><code>   30 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 </code></li>
+  <li><code></code></li>
+  <li><code>>> please enter 'y' to set registers</code></li>
+  <li><code>y</code></li>
+  <li><code></code></li>
+  <li><code>>> enable sensor</code></li>
+  <li><code>>> enable high resolution</code></li>
+  <li><code>>> enable temperature sensor</code></li>
+  <li><code>   CTRL_REG1 0x20 = 0x77</code></li>
+  <li><code>   CTRL_REG4 0x23 = 0x88</code></li>
+  <li><code>   TEMP_CFG_REG 0x1F = 0xC0</code></li>
+  <li><code></code></li>
+  <li><code>>> please enter 'y' to read from sensor</code></li>
+  <li><code>y</code></li>
+  <li><code>X =   -49, Y =    -1, Z =  -945, T =     8</code></li>
+  <li><code>X =   -36, Y =    10, Z =  -956, T =     8</code></li>
+  <li><code>X =   -56, Y =    15, Z =  -965, T =     8</code></li>
+  <li><code>X =   -35, Y =     1, Z =  -914, T =     9</code></li>
+  <li><code>...</code></li>
+  </ol>
+  
+  
+  <br/><br/>
+  
+  
+  <br/><b>Some other pages to read:</b><br/>
+  
+  <br/>1, SOLDER ANY EXPANSION DIRECTLY TO YOUR COMPUTER’S MEMORY [<a href="https://hackaday.com/2015/06/12/solder-any-expansion-directly-to-your-computers-memory/">LINK Here</a>]<br/>
+  
+  <br/>2, Hacking DDR3 SPD [<a href="https://hannuhartikainen.fi/blog/hacking-ddr3-spd/">LINK Here</a>]<br/>
+  
+  <br/>3, TWILight - VGA I²C breakout board [<a href="https://blog.atx.name/twilight-vga-i2c-breakout-board/">LINK Here</a>]<br/>
+  
+  <br/>
+  <br/>
+  <br>update on 2019.Mar.01</br>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
+</body>
+</html>
