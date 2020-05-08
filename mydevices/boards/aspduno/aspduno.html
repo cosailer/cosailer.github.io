@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;	 
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;	 	 
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    ol {  background: #4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+  <header>
+  <h1>Arcadia</h1>
+      the quieter you become, the more you hear
+  </header>
+  
+  <h2>aspduno</h2>
+  
+  <p align="right"><b>Return to index <a href="../index.html">HERE</a></b></p>
+  
+  <br/>aspduno is a hybrid development board that combines the design of both usbasp ( implemented on atmega32) and arduino leonardo (utilizes an atmega32u4). 6 external pads, I2C and 3 LEDs are brought out for both microcontrollers. A LDO (TC1262) is used to convert 5V to 3.3V for sensors if needed.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20200508_194702.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/IMG_20200508_194740.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">back</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>The picture below gives an overview of the board. It has two separated main sections, one has a M32 and the other has a M32U4. The two sections are connected through the LDO and the TTL in the middle. They can also be connected via the ISP connecters in the middle. For more details please refer to the schematics at the end.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/aspduno.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">section overview</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>The idea is that the two onboard atmega microcontroller can interact with each other to offer flexible application operation scheme. Currently there are three schemes of operation:<br/>
+  
+  <br/>1, the onboard m32 can be used as a standalone development section (program by an external ISP programmer). In the meantime, onboard m32 itself can be programed as an onboard usbasp programmer.<br/>
+  
+  <br/>2, the onboard m32u4 can be used as a standalone development section (program by an external ISP programmer or using the onboard usbasp described in scheme 1), or be programed as arduino leonardo once the arduino bootloader is burned.<br/>
+  
+  <br/>3, similar to the arduino uno, the m32u4 can be programed as a usb to serial bridge and used to upload sketch to the onboard m32( with the MightyCore bootloader from Hans).<br/>
+  
+  <br/>When building the board, an external ISP programmer is necessary to initialize the board. For switching between the operation schemes, the two microcontrollers need be wired accordingly.<br/>
+  
+  <br/>This is my first board design, the board does not fit any specific use case other than generic prototyping. For sure the board has problems that I am not aware of, but after all the testing I have done, everything seems to be working well. <br/>
+  
+  <br/>The name aspduno is a combination of usbasp and arduino, it is not all arduino so the letter 'i' is dropped, which also shows the resembles to the arduino "uno". Even though the board looks symmetrical, but actually not, just like the word aspduno. I chose m32 over m8 in my usbasp design because the function could be expanded for usbasp, plus I have some left over m32l.<br/>
+  
+  <br/>board eagle files<br/>
+  
+  <ol>
+    <li><code>attachment 1, 772KB [<a href="eagle/aspduno.sch">LINK Here</a>] schemetics file</code></li>
+    <li><code>attachment 2, 173KB [<a href="eagle/aspduno.brd">LINK Here</a>] PCB layout file</code></li>
+  </ol>
+  
+  <br/>
+  <br/>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
+</body>
+</html>
