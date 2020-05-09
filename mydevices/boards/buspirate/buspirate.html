@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;	 
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    ol {  background: #4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+  <header>
+  <h1>Arcadia</h1>
+      the quieter you become, the more you hear
+  </header>
+  
+  <h2>Build Your Own Bus Pirate</h2>
+  
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+  
+  <br/>The Bus Pirate is an open source hacker multi-tool that talks to electronic stuff, it speaks many protocols, like UART, 1-WIRE, SPI and so on. You can read more about it here [<a href="http://dangerousprototypes.com/docs/Bus_Pirate">LINK Here</a>]. <br/>
+  
+  <br/>One day I saw it from a friend and I immediately was amazed by the open source hardware concept. So I decided to build my very own bus pirate instead of purchasing a prebuilt one to both learn and practice.<br/>
+  
+  <br/>The first two boards I ordered from dangerous prototype are version 3.8. and then I successfuly built the board by following the link here [<a href="http://dangerousprototypes.com/docs/Bus_Pirate_v3.8">LINK Here</a>], you can also come across other guides over the internet, since a lot people have done it. <br/>
+  
+  <br/>however, I don't own a PIC programmer. To program the bus pirate v3.6, I built a avr based PIC programmer (ApProg) following this link [<a href="https://github.com/weblinux/ApProg">LINK Here</a>], I used a spare atmega32 and it successfully burned the bootloader. Then by booting to the bootloader I flashed the complete firmware without problem.<br/>
+  
+  <br/>The next step is to initiate a self test before it can be used. The first time the self test did not pass, so I resoldered some of the pins and the second time it passed. Below are the picutres of the bus pirate v3.8.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp3_8f.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v3.8 front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp3_8b.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v3.8 back</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>After the first success, I further purchased a few more blank PCBS to build some and gift them to friends. After a few days the PCB arrived with version 3.6. They are not much different from version 3.8, the main difference is the usb connecter. I actually prefer mini-usb over micro-usb for robustness. below are the pictures of finished boards. Detailed version regarding version 3.6 can be found here [<a href="http://dangerousprototypes.com/docs/Bus_Pirate_v3.6">LINK Here</a>].<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp3_6f.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v3.6 front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp3_6b.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v3.6 back</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>After the previous experiences, I then decided to build the version 4. This time I ordered about 10 PCB v4e directly from a PCB board manufacture, 11 have arrived. I constructed the board according to the link here [<a href="http://dangerousprototypes.com/docs/Bus_Pirate_v4_design_overview">LINK Here</a>]. The final board is shown below.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp4f.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v4.1e front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/bp4b.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">bus pirate v4.1e back</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>To program the bus pirate v4, a PICKit 2 is usually prefered, so I built the PICKit 2 on a blank board following several links here [<a href="http://www.elproducts.com/build-your-own-pickit-2.html">LINK Here</a>] and here [<a href="https://electronics-diy.com/electronic_schematic.php?id=821">LINK Here</a>]. Other sources can also be found easily. The picutres below shows the board.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/pickit2f.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">PICKit 2 front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/pickit2b.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">PICKit 2 back</span></td></tr>
+  </tbody>
+  </table>
+  
+  
+  <br/>However, at this point I still do not have the programmer to program the onboard PIC18F2550 for the PICKit 2, so a parallel port programmer ART2003 programmer is built following the guide here [<a href="http://dlmkerode.tripod.com/PICKIT2_1.htm">LINK Here</a>], it also contains the design of the PICKit 2. The picutres below shows the final result.<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/pic_progf.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">ART2003 front</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/pic_progb.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">ART2003 back</span></td></tr>
+  </tbody>
+  </table>
+  
+  
+  <br/>And now the circle of life is complete.<br/>
+  
+  <br/>
+  <br/>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
+</body>
+</html>
