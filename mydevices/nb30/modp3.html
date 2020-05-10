@@ -235,7 +235,7 @@
   
   <br/>The temperature sensor inside LIS3DH has a similar way to read. First the TEMP_CFG_REG must be set to connect temperature sensor to ADC3, then we read register OUT_ADC3 for data. However, even the ADC supports up to 10-bit data ouput, the sensor is still only 8-bit, which means only the data in OUT_ADC3_H is useful. Also the sensor has a precision about one celsius per digit change.<br/>
   
-  <br/>You can find the source of the program here [<a href="https://github.com/cosailer/i2c/tree/master/nb30_accelerometer">SOURCE Here</a>](for both LIS331DL and LIS2DH). Below is the sample program output on my NB30:<br/>
+  <br/>You can find the source of the program here [<a href="https://github.com/cosailer/trivial_code/tree/master/i2c/nb30_accelerometer">SOURCE Here</a>](for both LIS331DL and LIS2DH). Below is the sample program output on my NB30:<br/>
   
   <ol>
   <li><code>>> LIS3DH found ! ID = 0x33</code></li>

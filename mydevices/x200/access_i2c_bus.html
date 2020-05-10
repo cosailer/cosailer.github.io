@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;	 
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;	 	 
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    ol {  background: #4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    </style>
+</head>
+
+<body>
+  <header>
+  <h1>Arcadia</h1>
+      the quieter you become, the more you hear
+  </header>
+  
+  <h2>Access thinkpad x200 SPD I2C bus</h2>
+  
+  <p align="right"><b>Return to index <a href="../boot-image-mod.html">HERE</a></b></p>
+  
+  <br/>Normally you could easily access the SPD I2C bus on the computer to read the paratmeter of the RAM module. But on my X200, the normal method does not work anymore. Then I found out that the solution is to set a GPIO in the intel chipset. You need to set a GPIO to 1 in order to access the SPD eeprom, for T61(p)/X61(t)/T400/T500/W500/X200(t), the IO space address is 11B9, Bit[2] from 0 to 1, thus changing the value from  0xFB to 0xFF. For T60(p)/X60(t), the IO space address is 1680, Bit[3] from 0 to 1.<br/>
+  
+  <br/>They I modified the code from here [<a href="https://lab.whitequark.org/notes/2017-11-08/accessing-intel-ich-pch-gpios/">LINK Here</a>] to made it work under ubuntu [<a href="https://github.com/cosailer/trivial_code/tree/master/i2c/gpioke">LINK Here</a>]. To compile it, the libpci-dev library needs to be installed. The following shows the result on my X200<br/>
+  
+  <code>
+    <li>[*] Checking for a ICH6..ICH9 or Series 5..9 PCH system</li>
+    <li>[*] GPIOBASE=00001181, GC=10</li>
+    <li>[*] GPIO decoding is enabled</li>
+    <li>[*] GPIO lockdown is disabled</li>
+    <li>[*] USE_SEL1=030306f6</li>
+    <li>[*] IO_SEL1=1f55f9f1</li>
+    <li>[*] LVL1=1dfffb73</li>
+    <li>[*] USE_SEL2=00000000</li>
+    <li>[*] IO_SEL2=00000000</li>
+    <li>[*] LVL2=00000000</li>
+    <li>-----------------------------</li>
+    <li>>> original 0x11B9 : FB</li>
+    <li>>> setting  0x11B9 to 0xFF</li>
+    <li>>> current  0x11B9 : FF</li>
+    <li>-----------------------------</li>
+    <li>[+] Done</li>
+  </code>
+  
+  <br/>Now to access the I2C bus, load the I2C module : modprobe i2c-dev i2c-i801.<br/>
+  
+  <br/><br/>
+  
+  <br/>
+  <br/>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
+</body>
+</html>
