@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+    
+    <title>Arcadia</title>
+    
+    <style type="text/css" media="screen">
+    
+    header {
+        background-color: #4b6983;
+        color:white;
+        text-align:center;
+        padding:5px;   
+    }
+    
+    footer {
+        background-color: #4b6983;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px;      
+    }
+    
+    body { background: white; font-family: Verdana, sans-serif; font-size: 11pt; }
+    
+    span.yellow { font-weight: bold; color: yellow;}
+    span.red { font-weight: bold; color: red;}
+    span.blue { font-weight: bold; color: blue;}
+    
+    ol {  background: #4b6983; color: white;}
+    ol li {  background:#ffc; }
+    ol code {  color: black;  }
+    li {  background:#ffc; }
+    
+    code { white-space: pre; }
+    
+    a:link { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:visited { text-decoration: none; font-weight: bold; color: blue; background: #FFC; }
+    a:active { text-decoration: none; font-weight: bold; color: blue; background: #FC0; }
+    a:hover { text-decoration: none; color: blue; background: #FC0; }
+    
+    img { padding: 5px; border: 1px  solid black;}
+    
+    </style>
+</head>
+
+<body>
+  <header>
+  <h1>Arcadia</h1>
+      the quieter you become, the more you hear
+  </header>
+  
+  <h2>Adding a M.2 edge connector on the Lenovo ideapad 120S-11</h2>
+  
+  <p align="right"><b>Return to index <a href="index.html">HERE</a></b></p>
+  
+  <br/>One day I found the 120s on sale, and bought it. However, when I was searching the upgradability of this compter, things became more interesting. It turns out that the predecessor 110S has an empty M.2 slot that can be easily used to expand the hard drive capacity. But for the 120S, the M.2 is missing. So I decided to try to add the connector myself. You can find the ongoing discussion in the lenovo forum [<a href="https://forums.lenovo.com/t5/Lenovo-IdeaPad-1xx-3xx-5xx-7xx-Edge-LaVie-Z-Flex-Notebooks/Adding-a-M-2-edge-connector/m-p/4162916?page=1" >LINK Here</a>].<br/>
+  
+  <br/>The picture below shows the empty slot near the battery<br/>
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/slot.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">empty slot</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>By inspecting the slot carefully, I found out that the edge connector to use could be [<a href="http://www.jae.com/en/connectors/series/detail/product/id=68919" >SM3ZS067B120AM2R1500</a>]. However, I was unable to find a retailer for this connector. Then I found another connector [<a href="https://item.taobao.com/item.htm?spm=a1z0d.6639537.1997196601.4.6d497484aeea9a&id=562339375564" >AS0BC56-B15BM-7H</a>]. After the ordered samples arrived (shown in picture below), I started the experiment.</br>
+  
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/connector.small.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">AS0BC56-B15BM-7H</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>Unfortunately there are 4 x 0603 100nf capacitors also missing, they are right beneath the CPU heatsink. </br>
+  
+    <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/details.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">AS0BC56-B15BM-7H</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br>The following is my exact steps to add the connector:</br>
+  <br>Warning: Do not attemp this if you are not sure what you are doing! Accidents may result in destoryed motherboard, or even causes injury. Two other enthusiasts have not reported success with the same connector that I provided, so it can be assumed that they failed.</br>
+
+  <br>1, Unscew the bottom and the motherboard, then take out the motherboard and remove the heatsink. I lift the motherboard without taking out the battery and usb board. You could do that if you want to be on the safe side.</br>
+
+  <br>2, Use solder wick to remove the solder from pads (upper row: 1,3,5...75) gentely. Apply flux when necessary, I used Rosin instead.</br>
+
+  <br>3, use heat gun to blow the through holes (lower row: 2,4,6...68) on one side of the motherboard, once the solder inside the holes is melt, suck it out with solder sucker from the other side asap. This is the most difficult step for me, since pin 70,72,74 are grouped on the power rail together it takes a while to melt. I don't want to use temperatures that are too high to burn the board. If you manage to finish this part, then basically you are done.</br>
+
+  <br>4, clean the board and solder the connector, for my connector, I had to apply a little force for the socket to fit in notch1. I didn't clear solders in notch2 because my connector don't need to go through there.
+
+5, solder the 4 capacitor for sata line.</br>
+  
+  
+  <br/><table align="center" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; text-align: center;">
+  <tbody>
+    <tr><td style="text-align: center;"><img border="0" src="pic/withcard.jpg" /></td></tr>
+    <tr><td style="text-align: center;"><span style="font-family: inherit; font-size: small;">AS0BC56-B15BM-7H</span></td></tr>
+  </tbody>
+  </table>
+  
+  <br/>Finally I managed to install the socket on the slot, not perfectly fit though. I installed a 24GB sata ssd just for testing and it worked. the port supports sata 3.0 6gb. <br/>
+  
+  <br/>
+  <br/>
+  <br>update on 2020.Jun.13</br>
+  <br/>
+  
+  <footer>hosted by GitHub since 2014/Sep/15</footer>
+  
+</body>
+</html>

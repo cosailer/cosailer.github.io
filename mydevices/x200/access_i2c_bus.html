@@ -55,6 +55,7 @@
   <br/>Normally you could easily access the SPD I2C bus on the computer to read the paratmeter of the RAM module. But on my X200, the normal method does not work anymore. Then I found out that the solution is to set a GPIO in the intel chipset. You need to set a GPIO to 1 in order to access the SPD eeprom, for T61(p)/X61(t)/T400/T500/W500/X200(t), the IO space address is 11B9, Bit[2] from 0 to 1, thus changing the value from  0xFB to 0xFF. For T60(p)/X60(t), the IO space address is 1680, Bit[3] from 0 to 1.<br/>
   
   <br/>They I modified the code from here [<a href="https://lab.whitequark.org/notes/2017-11-08/accessing-intel-ich-pch-gpios/">LINK Here</a>] to made it work under ubuntu [<a href="https://github.com/cosailer/trivial_code/tree/master/i2c/gpioke">LINK Here</a>]. To compile it, the libpci-dev library needs to be installed. The following shows the result on my X200<br/>
+  <br/>
   
   <code>
     <li>[*] Checking for a ICH6..ICH9 or Series 5..9 PCH system</li>
